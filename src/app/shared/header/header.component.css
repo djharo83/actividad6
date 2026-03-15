@@ -1,0 +1,24 @@
+/* routerLinkActive */
+.active {
+  color: #FF8000 !important;
+  font-weight: 700;           /* Negrita para la página actual */
+  border-bottom: 2px solid #000; /* Subrayado elegante opcional */
+}
+
+/*Logo*/
+.logo {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* Esto asegura que el logo tenga su propio espacio sin forzar toda la nav */
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logo img:hover {
+  transform: scale(1.1); 
+}

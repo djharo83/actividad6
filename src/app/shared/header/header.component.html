@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-2">
+  <div class="container-fluid d-flex align-items-center">
+    <div class="logo">
+      <a class="navbar-brand" href="https://github.com/djharo83/actividad6" target="_blank" rel="noopener noreferrer" title="Ver proyecto en GitHub">
+      <img src="https://cdn.creazilla.com/icons/3242890/github-icon-md.png" alt="Logo"> 
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-dark px-3 fs-5" routerLinkActive="active" [routerLink]="['/home']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-dark px-3 fs-5" routerLinkActive="active" [routerLink]="['/newuser']">Nuevo Usuario</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
