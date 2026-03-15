@@ -1,1 +1,18 @@
-<p>users works!</p>
+<div class="container my-5">
+  <div class="row g-4 justify-content-center">
+    @for(user of arrayUsers(); track user.id){
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+      <app-user-card [miUser]="user"></app-user-card>
+    </div>
+    }
+  </div>
+</div>
+
+<!--
+
+    <div class="d-flex justify-content-between py-2">
+      <button class="btn btn-warning" (click)="goToPrev()">PREV</button>
+      <button class="btn btn-warning" (click)="goToNext()">NEXT</button>
+    </div>
+
+-->
