@@ -1,8 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { IResponse, IUser } from '../interfaces/iresponse.interface';
+import { map, Observable } from 'rxjs';
+import { IUser } from '../interfaces/iuser.interface';
+
+export type IResponse = {
+    page: number;
+    per_page: number;
+    total: number;
+    total_pages: number;
+    results: IUser[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +30,8 @@ export class UsersService {
     return this.httpClient.get<IResponse>(urlFinal);
   }
 
-  getById(id: string): Observable<IResponse> {
-    return this.httpClient.get<IResponse>(this.getUrl(id));
+  getById(id: string): Observable<IUser> {
+    return this.httpClient.get<IUser>(this.getUrl(id));
   }
 
   createUser(user: IUser): Observable<IUser> {
@@ -34,8 +42,8 @@ export class UsersService {
     return this.httpClient.put<IUser>(this.getUrl(id), user);
   }
   
-  deleteById(id: string): Observable<IResponse> {
-    return this.httpClient.delete<IResponse>(this.getUrl(id));
+  deleteById(id: string): Observable<IUser> {
+    return this.httpClient.delete<IUser>(this.getUrl(id));
   }
 
 }

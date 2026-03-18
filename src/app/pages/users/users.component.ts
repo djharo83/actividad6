@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { IResponse, IUser } from '../../interfaces/iresponse.interface';
-import { UsersService } from '../../services/users.service';
+import { IResponse, UsersService } from '../../services/users.service';
 import { UserCardComponent } from '../../componets/user-card/user-card.component';
+import { IUser } from '../../interfaces/iuser.interface';
 
 @Component({
   selector: 'app-users',
