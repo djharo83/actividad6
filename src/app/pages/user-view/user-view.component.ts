@@ -20,7 +20,6 @@ export class UserViewComponent {
   ngOnInit(){
     
     const userId = this.id();
-    console.log('Ruta id usuario: ', userId);
     
     if(userId){
       this.getUserById(userId);
@@ -36,12 +35,20 @@ export class UserViewComponent {
     this.userService.getById(id).subscribe({
       next: (data: IUser) => {
         this.user.set(data);
-        console.log(data);
       },
       error: (error) => {
         this.errorMessage = "No se ha encontrado al usuario";
       } 
     });
+  }
+
+    deleteUserById(userId: string|undefined) {
+    console.log('*********Entro en eliminar usuario************', userId);
+    if(userId){
+      this.userService.deleteById(userId);
+    }else{
+      this.errorMessage = 'El id del usuario no ha sido proporcionado.'
+    }
   }
 
 }
