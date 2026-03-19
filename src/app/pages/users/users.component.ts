@@ -34,6 +34,10 @@ export class UsersComponent {
     });
   }
 
+
+  deleteUserById() { //output de user-card
+    this.getAllUsers();
+  }
   
   //TODO: implementar metodos para la paginacion
   goToNext() {

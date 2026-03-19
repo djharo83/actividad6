@@ -1,6 +1,6 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { IUser } from '../../interfaces/iuser.interface';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -11,18 +11,34 @@ import { UsersService } from '../../services/users.service';
 })
 export class UserCardComponent {
 
-  miUser = input<IUser>();
-
   userService = inject(UsersService);
+  router = inject(Router)
 
+  miUser = input<IUser>();
   errorMessage: string | null = null;
 
-  deleteUserById(userId: string|undefined) {
-    console.log('*********Entro en eliminar usuario************', userId);
-    if(userId){
-      this.userService.deleteById(userId);
-    }else{
-      this.errorMessage = 'El id del usuario no ha sido proporcionado.'
+  userDeleted = output<void>();//Solo lo he hecho para tener en cuenta que si el componente padre users.component no sabe que ha habido un cambio
+                                // al estar en la misma pantalla home no veriamos el cambio de que se ha eliminado un usuario hasta refrescar o cambiar de página.
+
+  deleteUserById(user: IUser | undefined) {
+
+    if (!user || !user._id) return;
+
+    const userId = user._id;
+
+    if(confirm(`Deseas eliminar al usuario ${user.first_name}`)){
+      
+      this.errorMessage = null;
+      
+      this.userService.deleteById(userId).subscribe({
+        next: () => {
+          alert(`El usuario, ${user.first_name} se ha eliminado correctamente`);
+          this.userDeleted.emit();
+        },
+        error: () => {
+          this.errorMessage = 'No se pudo eliminar al usuario';
+        },
+      });
     }
   }
 

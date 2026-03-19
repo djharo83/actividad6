@@ -1,8 +1,8 @@
 <div class="container my-5">
   <div class="row g-4 justify-content-center">
-    @for(user of arrayUsers(); track user.id){
+    @for(user of arrayUsers(); track user._id){
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-      <app-user-card [miUser]="user"></app-user-card>
+      <app-user-card [miUser]="user" (userDeleted)="deleteUserById()"></app-user-card>
     </div>
     }
   </div>
