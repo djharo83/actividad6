@@ -1,19 +1,30 @@
-.card {
-  display: flex;
-  flex-direction: column;
+.user-detail-card {
+  max-width: 900px; /* Ancho ideal para una vista de detalle */
+  margin: 2rem auto;
+  min-height: 400px; /* Asegura una altura mínima elegante */
+}
+
+.img-wrapper {
+  /* Controlamos que la imagen ocupe todo el alto del contenedor izquierdo */
+  max-height: 500px; 
 }
 
 .imgUser {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; 
-  transition: transform 0.5s ease;
+  object-fit: cover; /* Recorta la imagen para que llene el espacio sin estirarse */
+  transition: transform 0.6s ease;
+}
+
+/* Efecto zoom solo en la imagen al pasar por la card */
+.user-detail-card:hover .imgUser {
+  transform: scale(1.05);
 }
 
 .btn-link {
-  transition: opacity 0.3s;
+  transition: all 0.3s ease;
 }
+
 .btn-link:hover {
-  opacity: 0.7;
+  opacity: 0.8;
   color: white !important;
+  transform: translateY(-3px); /* Pequeño salto hacia arriba */
 }

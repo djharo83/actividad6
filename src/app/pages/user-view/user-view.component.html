@@ -1,30 +1,47 @@
-<div class="card bg-secondary border border-3 border-white h-100 shadow-sm">
-  <div>
-    <figure class="m-0">
-      <img class="imgUser w-100" [src]="user()?.image" [alt]="user()?.first_name" />
-    </figure>
-    <div class="p-3 text-center">
-      <p class="text-white fw-bold mb-0 text-truncate">
-        {{ user()?.first_name }} {{ user()?.last_name }}
-      </p>
+<div class="card bg-secondary border border-3 border-white shadow-lg overflow-hidden user-detail-card">
+  <div class="row g-0">
+    
+    <!-- Lado Izquierdo: Imagen Rectangular -->
+    <div class="col-md-5">
+      <figure class="m-0 h-100 overflow-hidden img-wrapper">
+        <img class="imgUser h-100 w-100" [src]="user()?.image" [alt]="user()?.first_name" />
+      </figure>
     </div>
-  </div>
-  <!-- Iconos -->
-  <div class="row w-100 border-top border-light pt-3 pb-3 g-0 mt-auto">
-    <div class="col-4 text-center">
-      <button class="btn btn-link text-decoration-none text-light p-0" (click)="deleteUserById(user())">
-        <small>Eliminar</small>
-      </button>
+
+    <!-- Lado Derecho: Detalles y Botones -->
+    <div class="col-md-7 d-flex flex-column p-4 border-start border-light border-opacity-25">
+      <div class="user-info text-white mb-auto">
+        <h2 class="display-5 fw-bold mb-1">{{ user()?.first_name }}</h2>
+        <h3 class="h4 fw-light text-light mb-4">{{ user()?.last_name }}</h3>
+        
+        <div class="details-list mb-4">
+          <p class="mb-2"><span class="fw-bold text-light opacity-75">Nombre Usuario:</span> {{ user()?.username }}</p>
+          <p class="mb-2"><span class="fw-bold text-light opacity-75">Email:</span> {{ user()?.email }}</p>
+        </div>
+      </div>
+
+      <!-- Botones de Acción (Abajo) -->
+      <div class="row pt-4 border-top border-light border-opacity-25 g-2">
+        <div class="col-4 text-center">
+          <button class="btn btn-link text-decoration-none text-light p-0 w-100" (click)="deleteUserById(user())">
+            <i class="bi bi-trash d-block fs-4"></i>
+            <small>Eliminar</small>
+          </button>
+        </div>
+        <div class="col-4 text-center border-start border-end border-light">
+          <button class="btn btn-link text-decoration-none text-light p-0 w-100" [routerLink]="['/updateuser', user()?._id]">
+            <i class="bi bi-arrow-repeat d-block fs-4"></i>
+            <small>Actualizar</small>
+          </button>
+        </div>
+        <div class="col-4 text-center">
+          <button class="btn btn-link text-decoration-none text-light p-0 w-100" [routerLink]="['/home']">
+            <i class="bi bi-arrow-left-circle d-block fs-4"></i>
+            <small>Volver al listado</small>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="col-4 text-center border-start border-end border-light">
-      <button class="btn btn-link text-decoration-none text-light p-0" [routerLink]="['/updateuser', user()?._id]">
-        <small>Actualizar</small>
-      </button>
-    </div>
-    <div class="col-4 text-center">
-      <button class="btn btn-link text-decoration-none text-light p-0" [routerLink]="['/home']">
-        <small>Volver a listado</small>
-      </button>
-    </div>
+
   </div>
 </div>

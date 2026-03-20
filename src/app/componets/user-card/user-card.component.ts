@@ -2,6 +2,7 @@ import { Component, inject, input, output } from '@angular/core';
 import { IUser } from '../../interfaces/iuser.interface';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-card',
@@ -25,21 +26,43 @@ export class UserCardComponent {
     if (!user || !user._id) return;
 
     const userId = user._id;
-
-    if(confirm(`Deseas eliminar al usuario ${user.first_name}`)){
+    this.errorMessage = null;
       
-      this.errorMessage = null;
-      
-      this.userService.deleteById(userId).subscribe({
-        next: () => {
-          alert(`El usuario, ${user.first_name} se ha eliminado correctamente`);
-          this.userDeleted.emit();
-        },
-        error: () => {
-          this.errorMessage = 'No se pudo eliminar al usuario';
-        },
-      });
-    }
+    Swal.fire({
+      title: `Deseas Borrar al usuario ${user.first_name}`,
+      iconHtml: '<i class="bi bi-trash text-gray"></i>',
+      color: '#6c757d',
+      showCancelButton: true,
+      confirmButtonColor: '#6c757d',
+      cancelButtonColor: '#FF8000',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if(result.isConfirmed){
+          this.userService.deleteById(userId).subscribe({
+          next: () => {
+            Swal.fire({
+                  title: '¡Eliminado!',
+                  text: `El usuario ${user.first_name} se ha borrado correctamente`,
+                  icon: 'success',
+                  confirmButtonText: 'Cerrar',
+                  confirmButtonColor: '#6c757d',
+            });
+            this.userDeleted.emit();
+          },
+          error: () => {
+            this.errorMessage = 'No se pudo eliminar al usuario';
+            Swal.fire({
+              title: 'Error',
+              text: this.errorMessage,
+              icon: 'error',
+              confirmButtonText: 'Cerrar',
+              confirmButtonColor: '#6c757d'
+            });
+          },
+        });
+      }
+    });
   }
-
 }

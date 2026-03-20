@@ -10,10 +10,6 @@
   transition: transform 0.5s ease;
 }
 
-.card:hover .imgUser {
-  transform: scale(1.1);
-}
-
 .btn-link {
   transition: opacity 0.3s;
 }

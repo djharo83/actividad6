@@ -28,7 +28,7 @@ export class UsersComponent {
       next: (data: IResponse) => {
         this.arrayUsers.set(data.results);
       },
-      error: (error) => {
+      error: () => {
         this.errorMessage = "No se pudieron cargar los usuarios";
       } 
     });
