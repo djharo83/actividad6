@@ -34,7 +34,7 @@ export class UserViewComponent {
     this.errorMessage = null;
 
     this.userService.getById(id).subscribe({
-      next: (data: IUser) => {this.user.set(data);},
+      next: (data: IUser) => {this.user.set(data)},
       error: () => {
         this.errorMessage = 'No se ha encontrado al usuario';
       },

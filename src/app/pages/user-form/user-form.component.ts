@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import Swal from 'sweetalert2';
@@ -15,9 +15,21 @@ import { toast } from 'ngx-sonner';
 export class UserFormComponent {
 
   userForm: FormGroup
-  
+  id = input<string>();
+  errorMessage: string | null = null;
+  user = signal<IUser | null>(null);
+
   userService = inject(UsersService);
   router = inject(Router);
+
+  ngOnInit() {
+
+    const userId = this.id();
+
+    if (userId) {
+      this.getUserById(userId);
+    }
+  }
 
   constructor() {
     this.userForm = new FormGroup({
@@ -45,8 +57,12 @@ export class UserFormComponent {
   }
 
   getDataForm() {
-    this.createUser(this.userForm.value);
-    this.userForm.reset()
+
+    const userId = this.id();
+    const user: IUser = this.userForm.value;
+
+    userId ? this.updateUser(user, userId) : this.createUser(user);
+  
   }
 
   createUser(user: IUser | null) {
@@ -60,6 +76,34 @@ export class UserFormComponent {
       },
       error: () => {
           toast.error('Error al guardar', {description: 'No se pudo guardar al usuario.'
+      });
+      },
+    });
+  }
+
+  getUserById(id: string) {
+
+    this.errorMessage = null;
+
+    this.userService.getById(id).subscribe({
+      next: (data: IUser) => {this.userForm.patchValue(data)},
+      error: () => {
+        this.errorMessage = 'No se ha encontrado al usuario';
+      },
+    });
+  }
+  
+  updateUser(user: IUser | null, id:string | null) {
+
+    if (!user || !id) return;
+
+    this.userService.updateUser(user, id).subscribe({
+      next: () => {
+          toast.success('¡Usuario Actualizado!', {description: `El usuario ${user.first_name} se ha actualizado correctamente.`});
+          this.router.navigate(['/home']);
+      },
+      error: () => {
+          toast.error('Error al actualizar', {description: 'No se pudo actualizar al usuario.'
       });
       },
     });

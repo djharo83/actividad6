@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <p class="fw-bold fs-2" style="color: #FF8000;">Nuevo Usuario</p>
+  <p class="fw-bold fs-2" style="color: #FF8000;">{{!id() ? 'Nuevo Usuario' : 'Actualizar Usuario'}}</p>
   <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
     <div class="mb-3">
       <label for="first_name" class="form-label">Nombre</label>
@@ -41,16 +41,16 @@
       <label for="image" class="form-label">Imagen Usuario</label>
       <input type="text" class="form-control" id="image" placeholder="Introduzca la url de su foto de usuario https://ejemplo.com" formControlName="image">
         <div class= "error-container">
-        @if(checkControl('url', 'required' )){
+        @if(checkControl('image', 'required' )){
         <p class="error">Campo requerido</p>
         }
-        @if(checkControl('url', 'pattern' )){
+        @if(checkControl('image', 'pattern' )){
         <p class="error">La URL introducida no tiene un formato valida</p>
         }
       </div>
     </div>
     <div>
-        <input type="submit" class=" btn-custom-orange mb-5" value="Guardar Usuario" [disabled]="!userForm.valid">
+        <input type="submit" class=" btn-custom-orange mb-5" [value]=" !id() ? 'Guardar Usuario' : 'Actualizar Usuario'" [disabled]="!userForm.valid">
     </div>
   </form>
 </div>
