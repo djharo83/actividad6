@@ -4,7 +4,7 @@ import { UsersService } from '../../services/users.service';
 import Swal from 'sweetalert2';
 import { IUser } from '../../interfaces/iuser.interface';
 import { Router} from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-new-user-form',
@@ -18,7 +18,6 @@ export class UserFormComponent {
   
   userService = inject(UsersService);
   router = inject(Router);
-  private toastr = inject(ToastrService);
 
   constructor() {
     this.userForm = new FormGroup({
@@ -56,16 +55,12 @@ export class UserFormComponent {
 
     this.userService.createUser(user).subscribe({
       next: () => {
-            this.toastr.success(`El usuario ${user.first_name} se ha guardado`, '¡Éxito!', {
-            progressBar: true,
-            timeOut: 2000
-          });
+          toast.success('¡Usuario Guardado!', {description: `El usuario ${user.first_name} se ha guardado correctamente.`});
           this.router.navigate(['/home']);
       },
       error: () => {
-          this.toastr.error('No se pudo guardar al usuario', 'Error', {
-          closeButton: true,
-        });
+          toast.error('Error al guardar', {description: 'No se pudo guardar al usuario.'
+      });
       },
     });
   }
