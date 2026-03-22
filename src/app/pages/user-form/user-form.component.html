@@ -5,10 +5,10 @@
       <label for="first_name" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="first_name" placeholder="Introduzca su nombre" formControlName="first_name">
       <div class= "error-container">
-        @if(checkControl('first_name', 'required' )){
+        @if(checkControl('first_name', 'required')){
         <p class="error">Campo requerido</p>
         }
-        @if(checkControl('first_name', 'minlength' )){
+        @if(checkControl('first_name', 'minlength')){
         <p class="error">Campo con longitud minima de 3 caracteres</p>
         }
       </div>
@@ -17,10 +17,10 @@
       <label for="last_name" class="form-label">Apellidos</label>
       <input type="text" class="form-control" id="last_name" placeholder="Introduzca sus apellidos" formControlName="last_name">
       <div class= "error-container">
-        @if(checkControl('last_name', 'required' )){
+        @if(checkControl('last_name', 'required')){
         <p class="error">Campo requerido</p>
         }
-        @if(checkControl('last_name', 'minlength' )){
+        @if(checkControl('last_name', 'minlength')){
         <p class="error">Campo con longitud minima de 3 caracteres</p>
         }
       </div>
@@ -29,7 +29,7 @@
       <label for="email" class="form-label">Email Usuario</label>
       <input type="text" class="form-control" id="email" placeholder="Introduzca su email de usuario" formControlName="email">
       <div class= "error-container">
-        @if(checkControl('email', 'required' )){
+        @if(checkControl('email', 'required')){
         <p class="error">Campo requerido</p>
         }
         @if(checkControl('email', 'pattern' )){

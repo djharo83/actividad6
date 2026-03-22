@@ -47,13 +47,14 @@ export class UserFormComponent {
       ]),
       image: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)
+        Validators.pattern(/^(https?:\/\/).+$/)
       ])
     },[])
   }
 
   checkControl(controlName: string, errorName: string): boolean | undefined {
-    return this.userForm.get(controlName)?.hasError(errorName) && this.userForm.get(controlName)?.touched
+    const control = this.userForm.get(controlName);
+    return control?.hasError(errorName) && (control?.touched || control?.dirty || control?.value !== '');
   }
 
   getDataForm() {
