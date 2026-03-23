@@ -33,8 +33,8 @@ export class UserCardComponent {
       iconHtml: '<i class="bi bi-trash text-gray"></i>',
       color: '#6c757d',
       showCancelButton: true,
-      confirmButtonColor: '#6c757d',
-      cancelButtonColor: '#FF8000',
+      confirmButtonColor: '#FF8000',
+      cancelButtonColor: '#6c757d',
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
       reverseButtons: true
@@ -43,13 +43,16 @@ export class UserCardComponent {
           this.userService.deleteById(userId).subscribe({
           next: () => {
             Swal.fire({
-                  title: '¡Eliminado!',
-                  text: `El usuario ${user.first_name} se ha borrado correctamente`,
-                  icon: 'success',
-                  confirmButtonText: 'Cerrar',
-                  confirmButtonColor: '#6c757d',
+                    title: '¡Eliminado!',
+                    text: `El usuario ${user.first_name} se ha eliminado correctamente`,
+                    iconHtml: '<i class="bi bi-check-circle" style="color: #FF8000;"></i>',
+                    customClass: {//quita el circulo por defecto
+                        icon: 'border-0'
+                    },
+                    confirmButtonText: 'Volver al listado',
+                    confirmButtonColor: '#FF8000',
             });
-            this.userDeleted.emit();
+            this.userDeleted.emit();//emitir el evento al componente padre users.component
           },
           error: () => {
             this.errorMessage = 'No se pudo eliminar al usuario';

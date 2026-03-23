@@ -1,0 +1,18 @@
+/* 1. Centra el bloque de paginación */
+pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 2. Cambia el color del número de página actual */
+::ng-deep .ngx-pagination .current {
+  background: #FF8000 !important;
+  border-radius: 5px; /* Opcional: para que no sea un cuadrado perfecto */
+}
+
+/* 3.Cambia el color cuando se pasa el ratón por encima (hover) */
+::ng-deep .ngx-pagination a:hover {
+  background: rgba(255, 128, 0, 0.2) !important;
+  color: #FF8000 !important;
+}

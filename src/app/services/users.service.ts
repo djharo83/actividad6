@@ -25,8 +25,9 @@ export class UsersService {
     return id ? `${this.apiUrl}/${id}` : this.apiUrl;
   }
 
-  getAll(url: string = ''): Observable<IResponse> {
-    const urlFinal = url || this.getUrl();
+  getAll(page: number): Observable<IResponse> {
+    const urlFinal = `${this.getUrl()}?page=${page}`;
+    console.log(urlFinal);
     return this.httpClient.get<IResponse>(urlFinal);
   }
 

@@ -1,0 +1,9 @@
+.danger {
+  background-color: #FF8000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}

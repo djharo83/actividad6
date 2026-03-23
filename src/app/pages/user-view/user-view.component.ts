@@ -53,8 +53,8 @@ export class UserViewComponent {
       iconHtml: '<i class="bi bi-trash text-gray"></i>',
       color: '#6c757d',
       showCancelButton: true,
-      confirmButtonColor: '#6c757d',
-      cancelButtonColor: '#FF8000',
+      confirmButtonColor: '#FF8000',
+      cancelButtonColor: '#6c757d',
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
       reverseButtons: true
@@ -64,10 +64,13 @@ export class UserViewComponent {
           next: () => {
               Swal.fire({
                     title: '¡Eliminado!',
-                    text: `El usuario ${user.first_name} se ha borrado correctamente`,
-                    icon: 'success',
+                    text: `El usuario ${user.first_name} se ha eliminado correctamente`,
+                    iconHtml: '<i class="bi bi-check-circle" style="color: #FF8000;"></i>',
+                    customClass: {//quita el circulo por defecto
+                        icon: 'border-0'
+                    },
                     confirmButtonText: 'Volver al listado',
-                    confirmButtonColor: '#6c757d',
+                    confirmButtonColor: '#FF8000',
               }).then(()=> {
                 this.router.navigate(['/home']);
               })
